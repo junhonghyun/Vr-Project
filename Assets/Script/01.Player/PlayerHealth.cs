@@ -19,6 +19,7 @@ public class PlayerHealth : MonoBehaviour,IDamageable
             Debug.Log($"플레이어 체력{playerHealth}");
             if (playerHealth <=0)
             {
+                LoadSceneManager.Instance.GoScene("ResultScene");
                 GameManager.Instance.playerDie?.Invoke();
                 Debug.Log("캐릭터 사망!");
             }

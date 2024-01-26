@@ -62,12 +62,4 @@ public class Elevator : MonoBehaviour
         }
     }
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    CharacterController character = other.GetComponent<CharacterController>();
-    //    if (character != null)
-    //    {            
-    //        moveDirection = -1;
-    //    }
-    //}
 }

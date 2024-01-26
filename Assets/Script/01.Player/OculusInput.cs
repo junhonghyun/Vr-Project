@@ -15,7 +15,14 @@ public class OculusInput : MonoBehaviour
     [SerializeField]
     InputActionReference valueRTrigger;//트리거를 지속적으로 눌렀을때의 액션 
     [SerializeField]
+    public InputActionReference FullView;
+    [SerializeField]
     public InputActionReference installFieldBomb;//Enemy 처리용 폭탄 설치 변수 
+    [SerializeField]
+    Camera mainCamera1;
+ 
+    [SerializeField]
+    Transform cameraPosition;
 
     public bool shotBullet;
     public bool installBomb;
@@ -39,13 +46,14 @@ public class OculusInput : MonoBehaviour
         valueRGrip.action.canceled += OffInstallBomb;
         valueRTrigger.action.performed += OnShot;
         valueRTrigger.action.canceled += OffShot;
+     
    
 
         Debug.Log("오큘러스 인풋 실행");
     }
     void Start()
     {
-        
+
     }
     void Update()
     {
@@ -53,6 +61,14 @@ public class OculusInput : MonoBehaviour
     private void ThrowBomb()
     {
         
+    }
+    public void ZoomIn(InputAction.CallbackContext obj)
+    {
+        mainCamera1.fieldOfView = 10f;
+    }
+    public void ZoomOut(InputAction.CallbackContext context)
+    {
+        mainCamera1.fieldOfView = 90f;
     }
     public void OnInstallBomb(InputAction.CallbackContext obj)
     {

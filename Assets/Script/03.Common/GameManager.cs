@@ -65,14 +65,14 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         fieldBobmCount = 4;
-        GameSceneUIManager.Instance.PortalAllCount(fieldBobmCount);
+        GameSceneUIManager.Instance.PortalAllCount(" ",fieldBobmCount);
         GameClear=false;
         currenStage = 1;
         fieldBobmCount = 0;
         bombCount = 0;
         //GameFin += () => LoadSceneManager.Instance.GoScene("ResultScene");
         GameFin += isGameClear;
-        stage2 += () => GameSceneUIManager.Instance.StageTime += 120;
+        stage2 += () => GameSceneUIManager.Instance.StageTime += 150;
     }
 
     private void Start()
@@ -134,17 +134,9 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(6);
         LoadSceneManager.Instance.GoScene("ResultScene");
     }
-    private void OnGUI()
+    private void OnDestroy()
     {
-        if (GUI.Button(new Rect(40, 40, 350, 60), "테스트 버튼2"))
-        {
-            GameManager.Instance.enemyCount--;
-            GameManager.Instance.currentEnemyCount--;
-            GameManager.Instance.portalCount--;
-            GameManager.Instance.cureentPortalCount--;
-            Debug.Log($"현재 enemyCount{GameManager.Instance.enemyCount}");
-
-        }
+        ScoreContainer.Instance.remainTime = (int)GameSceneUIManager.Instance.StageTime;
     }
 
 }

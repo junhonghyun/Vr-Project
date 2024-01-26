@@ -82,11 +82,14 @@ public class GameSceneUIManager : MonoBehaviour
                 GameManager.Instance.playerDie?.Invoke();
             }
         }
+
     }
     private void ChangeTIme(float time)
     {
         if(time<=0)
-        { time = 0; }
+        { time = 0;
+            LoadSceneManager.Instance.GoScene("ResultScene");
+        }
         timeText.text=time.ToString("F2");
     }
     public void EnemyMaxCount(int enemy)
@@ -100,7 +103,11 @@ public class GameSceneUIManager : MonoBehaviour
     public void PortalAllCount(int portal) 
     {
         allPortalCount.text = "/"+portal.ToString();
-    } 
+    }
+    public void PortalAllCount(string test,int portal)
+    {
+        allPortalCount.text = test+"/" + portal.ToString();
+    }
     public void PortalCurrentCount(int portal) 
     {
         cureentPortalCount.text=portal.ToString();

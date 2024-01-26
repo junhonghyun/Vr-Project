@@ -14,6 +14,7 @@ public class HeadShot : MonoBehaviour
     {
         headShotImage.SetActive(true);
        enemy.OnDamage(damage, hitposition, direction, playerPosition);
+        ScoreContainer.Instance.headShot++;
         Invoke("Off", 1.0f);
         Debug.Log("Çìµå¼¦!");
     }

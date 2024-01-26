@@ -45,7 +45,7 @@ public class Gun : MonoBehaviour
     TextMeshProUGUI bulletCounting;
     OculusInput input;
     private LineRenderer lineRenderer;
-    List<GameObject> bulletContainor=new List<GameObject>();
+    List<GameObject> bulletContainor = new List<GameObject>();
     State state;
     int shotController;
     int bulletCount;
@@ -53,6 +53,7 @@ public class Gun : MonoBehaviour
     float shotTime;
     bool gunMode;
     float bombchk;
+
 
     private void Awake()
     {
@@ -70,9 +71,12 @@ public class Gun : MonoBehaviour
         shotSound = GetComponent<AudioSource>();
 
         input = player.GetComponent<OculusInput>();
+
         input.installFieldBomb.action.performed += ChangePickup;
+        input.FullView.action.performed += Reloading;
         shotController = 0;
     }
+ 
     private void FixedUpdate()
     {
         shotTime += Time.deltaTime;
@@ -107,7 +111,14 @@ public class Gun : MonoBehaviour
               
         
     }
-  
+    private void Reloading(InputAction.CallbackContext ob)
+    {
+        if (bulletCount < 30)
+        {
+            state = State.reload;
+            StartCoroutine(reloadAni());
+        }
+    }
     private void Shot()
     {
         if(input.shotBullet && shotTime >= 0.1)
